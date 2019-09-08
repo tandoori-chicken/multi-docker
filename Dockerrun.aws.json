@@ -1,0 +1,32 @@
+{
+	"AWSEBDockerrunVersion": 2,
+	"containerDefinitions": [{
+			"name": "client",
+			"image": "adarsh2day/mult-client",
+			"hostname": "client",
+			"essential": false
+		},
+		{
+			"name": "server",
+			"image": "adarsh2day/mult-server",
+			"hostname": "api",
+			"essential": false
+		},
+		{
+			"name": "worker",
+			"image": "adarsh2day/mult-worker",
+			"hostname": "worker",
+			"essential": false
+		},
+		{
+			"name": "nginx",
+			"image": "adarsh2day/mult-nginx",
+			"essential": true,
+			"portMappings": [{
+				"hostPort": 80,
+				"containerPort": 80
+			}],
+			"links": ["client", "server"]
+		}
+	]
+}

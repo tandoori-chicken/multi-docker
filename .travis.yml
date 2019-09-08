@@ -21,3 +21,17 @@ after_success:
   - docker push adarsh2day/multi-nginx
   - docker push adarsh2day/multi-server
   - docker push adarsh2day/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: eu-central-1
+  app:  multi-docker
+  env:  MultiDocker-env 
+  bucket_name:  elasticbeanstalk-eu-central-1-759161019306
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secreat_access_key:
+    secure: $AWS_SECRET_KEY
